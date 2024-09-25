@@ -76,8 +76,13 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:storage-kt:2.6.1")
     implementation("io.ktor:ktor-client-android:2.3.12")
     implementation ("io.ktor:ktor-client-core:2.3.12")
+    implementation (libs.ktor.client.cio)
+    implementation ("io.ktor:ktor-client-content-negotiation:2.3.12")
+    implementation ("io.ktor:ktor-serialization-kotlinx-json:2.3.12")
     implementation ("io.ktor:ktor-client-serialization:2.3.12")
-//    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:2.0.0")
+    implementation (libs.ktor.client.logging)
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:2.3.12")
+
 //    implementation ("androidx.compose.ui:ui:1.7.1") // Jetpack Compose
 //    implementation ("androidx.compose.material:material:1.7.1")
 //    implementation ("androidx.compose.ui:ui-tooling-preview:1.7.1")
