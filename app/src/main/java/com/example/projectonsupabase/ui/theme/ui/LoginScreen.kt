@@ -1,6 +1,5 @@
 package com.example.projectonsupabase.ui.theme.ui
 
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -8,16 +7,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.*
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.projectonsupabase.MainActivity
 import com.example.projectonsupabase.ViewModels.LoginViewModel
+import com.example.projectonsupabase.ViewModels.LoginViewModelFactory
 
 @Composable
-fun LoginScreen(context: Context, viewModel: LoginViewModel = viewModel())
+fun LoginScreen(context: MainActivity)
 {
+    //Используем фабрику для создания LoginViewModel с параметром context
+    val viewModel : LoginViewModel = viewModel(
+        factory = LoginViewModelFactory(context)
+    )
+
     var email by remember { mutableStateOf("")}
     var password by remember{ mutableStateOf("")}
-    val loginSuccess by remember { mutableStateOf(viewModel.loginError)}
-    val loginError by remember { mutableStateOf(viewModel.loginError)}
+
+    val loginSuccess = viewModel.loginSuccess
+    val loginError = viewModel.loginError
 
     Column (
         modifier = Modifier
@@ -60,8 +67,7 @@ fun LoginScreen(context: Context, viewModel: LoginViewModel = viewModel())
            Text("Login")
         }
 
-        Spacer(modifier =
-        Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         if (loginSuccess) {
             Text("Login successful!", color = MaterialTheme.colorScheme.primary)
